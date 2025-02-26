@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Inter', sans-serif;">
+        <div style="width: 700px; background: #eaeaea; border-radius: 20px; padding: 40px;">
+            <div style="display: flex; justify-content: center; gap: 94px; margin-bottom: 40px;">
+                <a href="/registration" style="font-size: 24px; font-weight: 800; color: #ff5c5c; text-decoration: underline;">Регистрация</a>
+                <a href="/auth" style="font-size: 24px; font-weight: 400; color: #000000; text-decoration: none;">Авторизация</a>
+            </div>
+            
+            <form action="/registration" method="POST" style="display: flex; flex-direction: column; gap: 20px;">
+                <input type="email" name="email" placeholder="Почта" required style="width: 100%; height: 40px; border-radius: 15px; padding: 0 20px;">
+                <input type="tel" name="phone" placeholder="Телефон" required style="width: 100%; height: 40px; border-radius: 15px; padding: 0 20px;">
+                <input type="text" name="telegram" placeholder="Telegram" style="width: 100%; height: 40px; border-radius: 15px; padding: 0 20px;">
+                <input type="text" name="username" placeholder="Логин" required style="width: 100%; height: 40px; border-radius: 15px; padding: 0 20px;">
+                <input type="password" name="password" placeholder="Пароль" required style="width: 100%; height: 40px; border-radius: 15px; padding: 0 20px;">
+                <label style="font-size: 12px; color: #6b6b6b;">
+                    <input type="checkbox" name="agree" required> Согласие на обработку персональных данных
+                </label>
+                
+                <button type="submit" style="width: 190px; height: 40px; background: #6b6b6b; color: white; border-radius: 15px; cursor: pointer;">Отправить</button>
+            </form>
+        </div>
+    </div>
+    
+    <style>
+        body { margin: 0; padding: 0; }
+        input:focus { outline: none; border-color: #ff5c5c; }
+        button:hover { background: #ff5c5c; transition: background 0.3s; }
+    </style>
+</body>
+</html>

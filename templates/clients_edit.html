@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редактирование клиента</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Inter, sans-serif;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 700px;
+            background-color: #eaeaea;
+            border-radius: 20px;
+            padding: 45px;
+            box-sizing: border-box;
+        }
+
+        .title {
+            font-size: 24px;
+            color: #000;
+            margin-bottom: 40px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #6b6b6b;
+            border-radius: 15px;
+            padding: 0 20px;
+            font-size: 12px;
+            color: #6b6b6b;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .input-field::placeholder {
+            color: #6b6b6b;
+        }
+
+        .save-button {
+            width: 190px;
+            height: 40px;
+            background-color: #6b6b6b;
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .save-button:hover {
+            background-color: #555555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Редактирование клиента</h1>
+        <div class="input-group">
+            <input type="text" class="input-field" placeholder="ФИО">
+        </div>
+        <div class="input-group">
+            <input type="text" class="input-field" placeholder="ИНН">
+        </div>
+        <div class="input-group">
+            <input type="text" class="input-field" placeholder="Полное юридическое название">
+        </div>
+        <div class="input-group">
+            <input type="tel" class="input-field" placeholder="Номер телефона">
+        </div>
+        <div class="input-group">
+            <input type="text" class="input-field" placeholder="Продукция">
+        </div>
+        <div class="input-group">
+            <input type="number" class="input-field" placeholder="Количество">
+        </div>
+        <div class="input-group">
+            <input type="number" class="input-field" placeholder="Сумма">
+        </div>
+        <button class="save-button">Сохранить</button>
+    </div>
+</body>
+</html>
+

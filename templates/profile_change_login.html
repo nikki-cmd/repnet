@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal Cabinet</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, sans-serif;
+        }
+        input {
+            border: 0.5px solid #6b6b6b;
+            border-radius: 10px;
+            padding: 0 20px;
+            color: #6b6b6b;
+            font-size: 12px;
+            outline: none;
+        }
+        input:focus {
+            border-color: #000;
+        }
+        button:hover {
+            opacity: 0.9;
+            cursor: pointer;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        a:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 1440px; height: 100%; margin: 0 auto; position: relative;">
+        <!-- Top Navigation -->
+        <nav style="padding: 100px 100px 0; display: flex; gap: 35px;">
+            <a href="#" style="font-size: 14px; color: #000;">Клиенты</a>
+            <a href="#" style="font-size: 14px; color: #000;">Заявки</a>
+            <a href="#" style="font-size: 14px; color: #000;">Статистика</a>
+            <a href="#" style="position: absolute; right: 100px; font-size: 14px; color: #000; font-weight: 600; text-decoration: underline;">Личный кабинет</a>
+        </nav>
+
+        <!-- Sub Navigation -->
+        <div style="padding: 60px 100px 0; display: flex; gap: 35px;">
+            <a href="#" style="font-size: 14px; color: #000;">Информация о пользователе</a>
+            <a href="#" style="font-size: 14px; color: #000;">Редактировать информацию</a>
+            <a href="#" style="font-size: 14px; color: #000; font-weight: 600; text-decoration: underline;">Изменить логин/пароль</a>
+            <a href="#" style="font-size: 14px; color: #000;">Аналитика</a>
+        </div>
+
+        <!-- Login Form -->
+        <form style="padding: 40px 100px; width: 204px;">
+            <input type="text" placeholder="Старый логин" style="width: 100%; height: 30px; margin-bottom: 12px;">
+            <input type="text" placeholder="Новый логин" style="width: 100%; height: 30px; margin-bottom: 12px;">
+            <input type="password" placeholder="Старый пароль" style="width: 100%; height: 30px; margin-bottom: 12px;">
+            <input type="password" placeholder="Новый пароль" style="width: 100%; height: 30px; margin-bottom: 20px;">
+            <button type="submit" style="width: 100%; height: 40px; background: #6b6b6b; border: none; border-radius: 15px; color: white; font-size: 14px;">Сохранить</button>
+        </form>
+
+        <!-- Footer -->
+        <footer style="position: absolute; bottom: 0; width: 100%; height: 116px; background: #6b6b6b; display: flex; align-items: center; justify-content: center; gap: 30px;">
+            <a href="#" style="color: white; font-size: 14px;">Форма обратной связи</a>
+            <a href="#" style="color: white; font-size: 14px;">Пользовательские соглашения</a>
+        </footer>
+    </div>
+</body>
+</html>
+

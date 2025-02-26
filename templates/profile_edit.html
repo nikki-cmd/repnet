@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal Cabinet</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, sans-serif;
+        }
+        input {
+            border: 0.5px solid #6b6b6b;
+            border-radius: 10px;
+            padding: 0 20px;
+            color: #6b6b6b;
+            font-size: 12px;
+            outline: none;
+        }
+        input::placeholder {
+            color: #6b6b6b;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: #000;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        .nav-link.active {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        .sub-nav-link {
+            text-decoration: none;
+            color: #000;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        .sub-nav-link.active {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        .save-btn:hover {
+            opacity: 0.9;
+            cursor: pointer;
+        }
+        .footer-link {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 20px;">
+        <!-- Top Navigation -->
+        <nav style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+            <div>
+                <a href="#" class="nav-link">Клиенты</a>
+                <a href="#" class="nav-link">Заявки</a>
+                <a href="#" class="nav-link">Статистика</a>
+            </div>
+            <div>
+                <a href="#" class="nav-link active">Личный кабинет</a>
+            </div>
+        </nav>
+
+        <!-- Sub Navigation -->
+        <div style="margin-bottom: 40px;">
+            <a href="#" class="sub-nav-link">Информация о пользователе</a>
+            <a href="#" class="sub-nav-link active">Редактировать информацию</a>
+            <a href="#" class="sub-nav-link">Изменить логин/пароль</a>
+            <a href="#" class="sub-nav-link">Аналитика</a>
+        </div>
+
+        <!-- Form -->
+        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 204px;">
+            <input type="text" placeholder="ФИО" style="height: 30px;">
+            <input type="email" placeholder="Почта" style="height: 30px;">
+            <input type="tel" placeholder="Телефон" style="height: 30px;">
+            <input type="text" placeholder="Telegram" style="height: 30px;">
+            <button class="save-btn" style="height: 40px; background: #6b6b6b; border: none; border-radius: 15px; color: white; font-size: 14px;">Сохранить</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #6b6b6b; padding: 40px 20px; position: fixed; bottom: 0; width: 100%; display: flex; justify-content: center; gap: 30px;">
+        <a href="#" class="footer-link">Форма обратной связи</a>
+        <a href="#" class="footer-link">Пользовательские соглашения</a>
+    </footer>
+</body>
+</html>
+

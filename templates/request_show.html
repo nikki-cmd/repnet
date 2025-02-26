@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application Form</title>
+    <style>
+        body {
+            font-family: Inter, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .application-card {
+            background: #d9d9d9;
+            border-radius: 20px;
+            padding: 30px;
+            width: 489px;
+            box-sizing: border-box;
+        }
+
+        .title {
+            font-size: 24px;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        .field-group {
+            margin-bottom: 15px;
+        }
+
+        .label {
+            font-size: 14px;
+            color: #6b6b6b;
+            margin-bottom: 5px;
+        }
+
+        .value {
+            font-size: 12px;
+            color: #6b6b6b;
+        }
+
+        .row {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 15px;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        .comment-section {
+            margin-top: 20px;
+        }
+
+        .datetime-section {
+            display: flex;
+            gap: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="application-card">
+        <div class="title">Заявка 1</div>
+
+        <div class="row">
+            <div class="column">
+                <div class="field-group">
+                    <div class="label">ФИО</div>
+                    <div class="value">Фамилия Имя Отчество</div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field-group">
+                    <div class="label">ИНН</div>
+                    <div class="value">9998887776</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column">
+                <div class="field-group">
+                    <div class="label">Полное юридическое название</div>
+                    <div class="value">Полное юридическое название 1</div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field-group">
+                    <div class="label">Номер телефона</div>
+                    <div class="value">+7 987 654 32 11</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column">
+                <div class="field-group">
+                    <div class="label">Продукция</div>
+                    <div class="value">Продукция 1</div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field-group">
+                    <div class="label">Сумма</div>
+                    <div class="value">1000</div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field-group">
+                    <div class="label">Количество (шт.)</div>
+                    <div class="value">10</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment-section">
+            <div class="field-group">
+                <div class="label">Комментарий</div>
+                <div class="value">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+        </div>
+
+        <div class="datetime-section">
+            <div class="field-group">
+                <div class="label">Дата</div>
+                <div class="value">12.01.24</div>
+            </div>
+            <div class="field-group">
+                <div class="label">Время</div>
+                <div class="value">12:25</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

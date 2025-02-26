@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Inter, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+            min-width: 600px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        .nav-link {
+            font-size: 14px;
+            text-decoration: none;
+            color: #000000;
+            cursor: pointer;
+        }
+        .nav-link:hover {
+            opacity: 0.8;
+        }
+        .nav-link.active {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        .profile-link {
+            font-size: 14px;
+            text-decoration: none;
+            color: #000000;
+        }
+        .profile-link:hover {
+            opacity: 0.8;
+        }
+        .table-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 40px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0 16px;
+            overflow-x: auto;
+        }
+        .header-cell {
+            font-size: 14px;
+            font-weight: 400;
+            color: #000000;
+            padding: 8px;
+            white-space: nowrap;
+        }
+        .fio { min-width: 53px; }
+        .inn { min-width: 73px; }
+        .company-name { min-width: 216px; }
+        .phone { min-width: 116px; }
+        .product { min-width: 77px; }
+        .quantity { min-width: 116px; }
+        .amount { min-width: 90px; }
+        .table-row {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            min-width: 1200px;
+            border-bottom: 1px solid #eee;
+        }
+        .table-row div {
+            color: #6b6b6b;
+            font-size: 12px;
+            font-weight: 400;
+        }
+        .table-row div:nth-child(1) { width: 150px; }
+        .table-row div:nth-child(2) { width: 100px; }
+        .table-row div:nth-child(3) { flex: 1; }
+        .table-row div:nth-child(4) { width: 150px; }
+        .table-row div:nth-child(5) { width: 100px; }
+        .table-row div:nth-child(6) { width: 50px; text-align: center; }
+        .table-row div:nth-child(7) { width: 100px; text-align: right; }
+        .edit-button {
+            margin-left: 20px;
+            padding: 6px 12px;
+            border: 0.5px solid #6b6b6b;
+            border-radius: 10px;
+            background: transparent;
+            color: #6b6b6b;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .edit-button:hover {
+            background-color: #f5f5f5;
+        }
+        /* Стиль для кнопки "Добавить" */
+        .add-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 25px;
+            border: 0.5px solid #6b6b6b;
+            border-radius: 10px;
+            cursor: pointer;
+            min-width: fit-content;
+            background: transparent;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        .add-button:hover {
+            background-color: rgba(107, 107, 107, 0.1);
+        }
+        .add-button-text {
+            font-weight: 400;
+            font-size: 10px;
+            color: #6b6b6b;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-links">
+            <a href="#" class="nav-link active">Клиенты</a>
+            <a href="#" class="nav-link">Заявки</a>
+            <a href="#" class="nav-link">Статистика</a>
+        </nav>
+        <a href="#" class="profile-link">Личный кабинет</a>
+    </header>
+    <div class="table-header">
+        <div class="header-cell fio">Фио</div>
+        <div class="header-cell inn">ИНН</div>
+        <div class="header-cell company-name">Полное юридическое название</div>
+        <div class="header-cell phone">Номер телефона</div>
+        <div class="header-cell product">Продукция</div>
+        <div class="header-cell quantity">Количество (шт.)</div>
+        <div class="header-cell amount">Сумма (руб.)</div>
+    </div>
+    
+    {% for client in clients %}
+        <div class="table-row">
+            <input type="hidden" id="client_id" value="{{ client[0] }}">
+            <div>ID клиента: {{ client[0] }}</div>
+            <div>{{ client[1] }}</div> <!-- Фио -->
+            <div>{{ client[2] }}</div> <!-- ИНН -->
+            <div>{{ client[3] }}</div> <!-- Название компании -->
+            <div>{{ client[4] }}</div> <!-- Телефон -->
+            <div>{{ client[5] }}</div> <!-- Продукция -->
+            <div>{{ client[6] }}</div> <!-- Количество -->
+            <div>{{ client[7] }}</div> <!-- Сумма -->
+            <!-- Кнопка "Редактировать" внутри строки таблицы -->
+            <div class="edit-button" onclick="openEditModal('{{ client[1] }}', '{{ client[2] }}', '{{ client[3] }}', '{{ client[4] }}', '{{ client[5] }}', '{{ client[6] }}', '{{ client[7] }}', '{{client[0]}}')">Редактировать</div>
+
+        </div>
+    {% endfor %}
+
+
+
+    <!-- Модальное окно с формой для редактирования клиента -->
+    <div id="myEditModal" class="modal">
+        <div style="width: 700px; background-color: #eaeaea; border-radius: 20px; padding: 45px;">
+            <h1 style="font-size: 24px; font-weight: 400; color: #000000; margin-bottom: 40px;">Добавление клиента</h1>
+            <!-- Сама форма с предзаполненными данными -->
+            <form action="/edit_client" method="POST">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <input type="hidden" id="client_id" name="client_id">
+                    <input type="text" id="fio" name="fio" placeholder="ФИО">
+                    <input type="text" id="inn" name="inn" placeholder="ИНН">
+                    <input type="text" id="company_name" name="company_name" placeholder="Полное юридическое название">
+                    <input type="tel" id="phone" name="phone" placeholder="Номер телефона">
+                    <input type="text" id="product" name="product" placeholder="Продукция">
+                    <input type="number" id="quantity" name="quantity" placeholder="Количество">
+                    <input type="number" id="total_amount" name="total_amount" placeholder="Сумма">
+                    <button id="submit" style="width: 190px; height: 40px; background-color: #6b6b6b; color: white; border: none; border-radius: 15px; font-size: 14px; cursor: pointer; margin-top: 20px;">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Кнопка для открытия формы в модальном окне -->
+    <div class="add-button" onclick="openModal()">
+        <span class="add-button-text">Добавить</span>
+    </div>
+
+    <!-- Модальное окно с формой для добавления клиента -->
+    <div id="myModal" class="modal">
+        <div style="width: 700px; background-color: #eaeaea; border-radius: 20px; padding: 45px;">
+            <h1 style="font-size: 24px; font-weight: 400; color: #000000; margin-bottom: 40px;">Добавление клиента</h1>
+            <form action="/add_client" method="POST">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <input type="hidden" id="client_id" name="client_id">
+
+                    <input type="text" id="fio" name="fio" placeholder="ФИО" style="width: 610px; height: 40px; border: 1px solid #6b6b6b; border-radius: 15px; padding: 0 20px; font-size: 12px; color: #6b6b6b; outline: none;">
+                    
+                    <input type="text" id="inn" name="inn" placeholder="ИНН" style="width: 610px; height: 40px; border: 1px solid #6b6b6b; border-radius: 15px; padding: 0 20px; font-size: 12px; color: #6b6b6b; outline: none;">
+                    
+                    <input type="text" id="company_name" name="company_name" placeholder="Полное юридическое название" style="width: 610px; height: 40px; border: 1px solid #6b6b6b; border-radius: 15px; padding: 0 20px; font-size: 12px; color: #6b6b6b; outline: none;">
+                    
+                    <input type="tel" id="phone" name="phone" placeholder="Номер телефона" style="width: 610px; height: 40px; border: 1px solid #6b6b6b; border-radius: 15px; padding: 0 20px; font-size: 12px; color: #6b6b6b; outline: none;">
+                    
+                    <input type="text" id="product" name="product" placeholder="Продукция" style="width: 610px; height: 40px; border: 1px solid #6b6b6b; border-radius: 15px; padding: 0 20px; font-size: 12px; color: #6b6b6b; outline: none;">
+                    
+                    <input type="number" id="quantity" name="quantity" placeholder="Количество" style="width: 610px; height: 40px; border: 1px solid #6b6b6b; border-radius: 15px; padding: 0 20px; font-size: 12px; color: #6b6b6b; outline: none;">
+                    
+                    <input type="number" id="total_amount" name="total_amount" placeholder="Сумма" style="width: 610px; height: 40px; border: 1px solid #6b6b6b; border-radius: 15px; padding: 0 20px; font-size: 12px; color: #6b6b6b; outline: none;">
+                    
+                    <button id="submit" style="width: 190px; height: 40px; background-color: #6b6b6b; color: white; border: none; border-radius: 15px; font-size: 14px; cursor: pointer; margin-top: 20px;">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Функция для открытия модального окна с данными для редактирования
+        function openEditModal(fio, inn, company_name, phone, product, quantity, total_amount, client_id) {
+            document.getElementById('client_id').value = client_id;
+            document.getElementById('fio').value = fio;
+            document.getElementById('inn').value = inn;
+            document.getElementById('company_name').value = company_name;
+            document.getElementById('phone').value = phone;
+            document.getElementById('product').value = product;
+            document.getElementById('quantity').value = quantity;
+            document.getElementById('total_amount').value = total_amount;
+            
+            console.log(client_id)  
+            // Отображаем модальное окно
+            document.getElementById('myEditModal').style.display = 'block';
+        }
+
+        // Обработчик закрытия модального окна
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myEditModal")) {
+                closeEditModal();
+            }
+        }
+
+        // Закрытие модального окна
+        function closeEditModal() {
+            document.getElementById("myEditModal").style.display = "none";
+        }
+
+
+        // Открыть модальное окно
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        // Закрыть модальное окно
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        // Закрытие модального окна при клике за его пределами
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myModal")) {
+                closeModal();
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myEditModal")) {
+                closeEditModal();
+            }
+        }
+    </script>
+</body>
+</html>

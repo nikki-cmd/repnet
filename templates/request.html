@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Inter, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Component -->
+        <header class="header" style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 60px; min-width: 400px; font-family: Inter, sans-serif;">
+            <nav class="nav-links" style="display: flex; gap: 35px;">
+                <a href="#" class="nav-link" style="font-size: 14px; color: #000000; text-decoration: none; cursor: pointer;">Клиенты</a>
+                <a href="#" class="nav-link active" style="font-size: 14px; color: #000000; text-decoration: underline; font-weight: 600; cursor: pointer;">Заявки</a>
+                <a href="#" class="nav-link" style="font-size: 14px; color: #000000; text-decoration: none; cursor: pointer;">Статистика</a>
+            </nav>
+            <a href="#" class="profile-link" style="font-size: 14px; color: #000000; text-decoration: none; cursor: pointer;">Личный кабинет</a>
+        </header>
+
+        <!-- Table Header Component -->
+        <div class="table-header" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; min-height: 51px; width: 100%; background-color: #ffffff; border-bottom: 1px solid #e0e0e0; overflow-x: auto;">
+            <div style="min-width: 53px; padding: 0 10px; font-size: 14px; font-weight: 400; color: #000000; white-space: nowrap;">Фио</div>
+            <div style="min-width: 73px; padding: 0 10px; font-size: 14px; font-weight: 400; color: #000000; white-space: nowrap;">ИНН</div>
+            <div style="min-width: 157px; padding: 0 10px; font-size: 14px; font-weight: 400; color: #000000; white-space: nowrap; text-align: left;">Полное юридическое название</div>
+            <div style="min-width: 116px; padding: 0 10px; font-size: 14px; font-weight: 400; color: #000000; white-space: nowrap;">Номер телефона</div>
+            <div style="min-width: 77px; padding: 0 10px; font-size: 14px; font-weight: 400; color: #000000; white-space: nowrap;">Продукция</div>
+            <div style="min-width: 83px; padding: 0 10px; font-size: 14px; font-weight: 400; color: #000000; white-space: nowrap; text-align: center;">Количество (шт.)</div>
+            <div style="min-width: 52px; padding: 0 10px; font-size: 14px; font-weight: 400; color: #000000; white-space: nowrap; text-align: right;">Сумма (руб.)</div>
+            <div style="min-width: 100px; padding: 0 10px; font-size: 14px; font-weight: 400; color: #000000; white-space: nowrap; text-align: center;">Документы (получены/<br>не получены)</div>
+        </div>
+
+        <!-- Вместо статического TableRow добавляем цикл -->
+        {% for request in requests %}
+        <div class="table-row" style="display: flex; align-items: center; padding: 10px; min-width: 1000px; border-bottom: 1px solid #eee; height: 50px;">
+            <!-- ФИО -->
+            <div style="width: 150px; color: #6b6b6b; font-size: 12px;">
+                {% set parts = request[1].split(' ') %}
+                <div>{{ parts[0] if parts|length > 0 else '' }}</div>  <!-- Фамилия -->
+                <div>{{ parts[1] if parts|length > 1 else '' }}</div>  <!-- Имя -->
+                <div>{{ parts[2] if parts|length > 2 else '' }}</div>  <!-- Отчество -->
+            </div>
+            
+            <!-- ИНН -->
+            <div style="width: 100px; color: #6b6b6b; font-size: 12px;">{{ request[2] }}</div>
+            
+            <!-- Название компании -->
+            <div style="width: 200px; color: #6b6b6b; font-size: 12px;">{{ request[3] }}</div>
+            
+            <!-- Телефон -->
+            <div style="width: 150px; color: #6b6b6b; font-size: 12px;">{{ request[4] }}</div>
+            
+            <!-- Продукция -->
+            <div style="width: 120px; color: #6b6b6b; font-size: 12px;">{{ request[5] }}</div>
+            
+            <!-- Количество -->
+            <div style="width: 50px; color: #6b6b6b; font-size: 12px; text-align: center;">{{ request[6] }}</div>
+            
+            <!-- Сумма -->
+            <div style="width: 60px; color: #6b6b6b; font-size: 12px; text-align: center;">{{ "%.2f"|format(request[7]) }}</div>
+            
+            <!-- Документы -->
+            <div style="width: 60px; display: flex; align-items: center; justify-content: center;">
+                {% if request[8] %}
+                    ✓  <!-- Галочка, если документы получены -->
+                {% else %}
+                    ✗  <!-- Крестик, если не получены -->
+                {% endif %}
+            </div>
+            
+            <!-- Кнопка действия -->
+            <div style="width: 120px;">
+                <button style="width: 100px; height: 25px; border-radius: 10px; 
+                    border: 0.5px solid #6b6b6b; background: transparent; 
+                    color: #6b6b6b; font-size: 10px; cursor: pointer;">
+                    Детали
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- Repeat TableRow as needed -->
+
+        <!-- Pagination Component -->
+        <div class="pagination" style="display: flex; align-items: center; gap: 10px; min-width: 250px;">
+            <div style="width: 20px; height: 20px; border: 0.5px solid #6b6b6b; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s ease;">
+                <span style="font-size: 10px; color: #d9d9d9;">&lt;&lt;</span>
+            </div>
+            <div style="width: 20px; height: 20px; border: 0.5px solid #6b6b6b; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s ease;">
+                <span style="font-size: 10px; color: #d9d9d9;">&lt;</span>
+            </div>
+            <div style="width: 20px; height: 20px; border: 0.5px solid #6b6b6b; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s ease;">
+                <span style="font-size: 10px; color: #d9d9d9;">1</span>
+            </div>
+            <div style="width: 20px; height: 20px; border: 0.5px solid #6b6b6b; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s ease;">
+                <span style="font-size: 10px; color: #6b6b6b;">2</span>
+            </div>
+            <div style="width: 20px; height: 20px; border: 0.5px solid #6b6b6b; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s ease;">
+                <span style="font-size: 10px; color: #6b6b6b;">...</span>
+            </div>
+            <div style="width: 20px; height: 20px; border: 0.5px solid #6b6b6b; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s ease;">
+                <span style="font-size: 10px; color: #6b6b6b;">20</span>
+            </div>
+            <div style="width: 20px; height: 20px; border: 0.5px solid #6b6b6b; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s ease;">
+                <span style="font-size: 10px; color: #6b6b6b;">&gt;</span>
+            </div>
+            <div style="width: 20px; height: 20px; border: 0.5px solid #6b6b6b; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s ease;">
+                <span style="font-size: 10px; color: #6b6b6b;">&gt;&gt;</span>
+            </div>
+        </div>
+
+        <!-- Footer Button Component -->
+        <div class="footer-button" style="position: relative; display: flex; align-items: center; justify-content: center; min-width: 168px; height: 25px; border-radius: 10px; border: 0.5px solid #6B6B6B; cursor: pointer; transition: all 0.3s ease; background-color: #fff;">
+            <span class="footer-button-text" style="font-size: 10px; color: #6B6B6B; text-align: center; padding: 0 10px;">История заявок</span>
+        </div>
+    </div>
+</body>
+</html>

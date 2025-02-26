@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, sans-serif;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        a:hover {
+            opacity: 0.8;
+        }
+        .nav-link {
+            font-size: 14px;
+            font-weight: 400;
+            margin-right: 20px;
+        }
+        .nav-link.active {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        .sub-nav-link {
+            font-size: 14px;
+            font-weight: 400;
+            margin-right: 30px;
+        }
+        .sub-nav-link.active {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        .info-box {
+            border: 0.5px solid #6B6B6B;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .info-label {
+            font-size: 12px;
+            color: #6B6B6B;
+            margin-bottom: 10px;
+        }
+        .footer-link {
+            color: #FFFFFF;
+            font-size: 14px;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 20px;">
+        <!-- Top Navigation -->
+        <nav style="display: flex; align-items: center; margin-bottom: 40px;">
+            <a href="#" class="nav-link">Клиенты</a>
+            <a href="#" class="nav-link">Заявки</a>
+            <a href="#" class="nav-link">Статистика</a>
+            <div style="margin-left: auto;">
+                <a href="#" class="nav-link active">Личный кабинет</a>
+            </div>
+        </nav>
+
+        <!-- Sub Navigation -->
+        <div style="margin-bottom: 40px;">
+            <a href="#" class="sub-nav-link active">Информация о пользователе</a>
+            <a href="#" class="sub-nav-link">Редактировать информацию</a>
+            <a href="#" class="sub-nav-link">Изменить логин/пароль</a>
+            <a href="#" class="sub-nav-link">Аналитика</a>
+        </div>
+
+        <!-- User Info Box -->
+        <div class="info-box" style="width: 204px;">
+            <div class="info-label">ФИО</div>
+            <div class="info-label">Почта</div>
+            <div class="info-label">Телефон</div>
+            <div class="info-label">Telegram</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="background-color: #6B6B6B; padding: 40px 100px; position: fixed; bottom: 0; width: 100%; box-sizing: border-box;">
+        <div style="display: flex; justify-content: flex-end;">
+            <a href="#" class="footer-link">Форма обратной связи</a>
+            <a href="#" class="footer-link">Пользовательские соглашения</a>
+        </div>
+    </div>
+</body>
+</html>
+

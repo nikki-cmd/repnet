@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Создание заявки</title>
+</head>
+<body>
+    <div style="width: 700px; height: auto; background: #eaeaea; border-radius: 20px; padding: 20px; font-family: Inter, sans-serif;">
+        <h1 style="font-size: 24px; font-weight: 400; color: #000000; margin: 71px 0 40px 25px;">Создание заявки</h1>
+        
+        <div style="margin: 0 45px;">
+            <div style="margin-bottom: 18px;">
+                <div style="position: relative; width: 610px; height: 40px; border: 1px solid #6b6b6b; border-radius: 15px;">
+                    <div style="position: absolute; top: 7px; left: 20px; font-size: 12px; color: #6b6b6b;">Название клиента</div>
+                    <div style="position: absolute; top: 22px; left: 20px; font-size: 8px; color: #9f9f9f;">Должно быть указано полное название юридического лица без сокращений</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 18px;">
+                <div style="position: relative; width: 610px; height: 49px; border: 1px solid #6b6b6b; border-radius: 15px;">
+                    <div style="position: absolute; top: 7px; left: 20px; font-size: 12px; color: #6b6b6b;">Наименование точки</div>
+                    <div style="position: absolute; top: 22px; left: 20px; font-size: 8px; color: #9f9f9f;">Должно быть указано общедоступное название магазина (если есть на карте, то его. Если нет, то название вывески магазина. Будет использоваться в рекламных целях в.т.ч)</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 18px;">
+                <div style="position: relative; width: 610px; height: 49px; border: 1px solid #6b6b6b; border-radius: 15px;">
+                    <div style="position: absolute; top: 6px; left: 20px; font-size: 12px; color: #6b6b6b;">Адрес точки</div>
+                    <div style="position: absolute; top: 24px; left: 20px; font-size: 8px; color: #9f9f9f;">Полное указание адреса (в поле ввода обязательно иметь маску ввода адреса. Регион, название населенного пункта, полное название улицы, номер дома)</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 28px;">
+                <div style="position: relative; width: 610px; height: 40px; border: 1px solid #6b6b6b; border-radius: 15px;">
+                    <div style="position: absolute; top: 12px; left: 20px; font-size: 12px; color: #6b6b6b;">Перечень товара и количество, который клиент готов взять</div>
+                </div>
+            </div>
+
+            <button style="width: 190px; height: 40px; background: #6b6b6b; border: none; border-radius: 15px; color: white; font-size: 14px; font-weight: 400; cursor: pointer; transition: opacity 0.3s;">Далее</button>
+        </div>
+    </div>
+
+    <script>
+        // Add hover effect for button
+        const button = document.querySelector('button');
+        button.addEventListener('mouseenter', () => {
+            button.style.opacity = '0.8';
+        });
+        button.addEventListener('mouseleave', () => {
+            button.style.opacity = '1';
+        });
+
+        // Make input fields interactive
+        const inputContainers = document.querySelectorAll('[style*="border: 1px solid #6b6b6b"]');
+        inputContainers.forEach(container => {
+            container.style.cursor = 'text';
+            container.addEventListener('click', () => {
+                const input = document.createElement('input');
+                input.style.width = '90%';
+                input.style.height = '20px';
+                input.style.border = 'none';
+                input.style.outline = 'none';
+                input.style.background = 'transparent';
+                input.style.marginLeft = '20px';
+                input.style.marginTop = '20px';
+                input.style.fontSize = '12px';
+                
+                // Replace the container content with input
+                const originalContent = container.innerHTML;
+                container.innerHTML = '';
+                container.appendChild(input);
+                input.focus();
+
+                // Restore original content when input loses focus
+                input.addEventListener('blur', () => {
+                    container.innerHTML = originalContent;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

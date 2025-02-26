@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, sans-serif;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            min-width: 300px;
+            height: 60px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        a {
+            font-size: 14px;
+            font-weight: 400;
+            text-decoration: none;
+            color: #000000;
+        }
+        .active {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 100px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-item {
+            color: black;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+        }
+        .table-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+            min-height: 40px;
+        }
+
+        .header-item {
+            font-family: Inter, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #000000;
+            padding: 0 15px;
+            white-space: nowrap;
+        }
+
+        .name-col {
+            min-width: 66px;
+        }
+
+        .date-col {
+            min-width: 33px;
+            display: flex;
+            align-items: center;
+        }
+
+        .time-col {
+            min-width: 45px;
+        }
+
+        .comment-col {
+            min-width: 94px;
+            flex-grow: 1;
+        }
+
+        .client-col {
+            min-width: 49px;
+        }
+
+        .dropdown {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            font-family: Inter, sans-serif;
+            font-size: 14px;
+        }
+
+        .dropdown:hover {
+            border-color: #999;
+        }
+
+        .dropdown:focus {
+            outline: none;
+            border-color: #666;
+        }
+
+        .table-row {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            min-width: 800px;
+            height: 40px;
+            font-family: Inter, sans-serif;
+            overflow-x: auto;
+        }
+
+        .table-cell {
+            color: #6b6b6b;
+            font-size: 12px;
+            margin-right: 20px;
+            white-space: nowrap;
+        }
+
+        .invoice-number {
+            width: 50px;
+        }
+
+        .date {
+            width: 60px;
+        }
+
+        .time {
+            width: 40px;
+        }
+
+        .description {
+            flex: 1;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .action-button {
+            border: 0.5px solid #6b6b6b;
+            border-radius: 10px;
+            padding: 6px 15px;
+            color: #6b6b6b;
+            font-size: 10px;
+            background: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .action-button:hover {
+            background-color: #6b6b6b;
+            color: white;
+        }
+
+        .pagination-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: Inter, sans-serif;
+            font-size: 10px;
+            min-width: 250px;
+            padding: 10px;
+        }
+
+        .page-item {
+            cursor: pointer;
+            color: #6b6b6b;
+            padding: 5px;
+        }
+
+        .page-item.disabled {
+            color: #d9d9d9;
+            cursor: not-allowed;
+        }
+
+        .current-page {
+            border: 0.5px solid #6b6b6b;
+            border-radius: 5px;
+            padding: 4px 8px;
+            min-width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .dropdown select {
+            padding: 5px;
+            font-family: Inter, sans-serif;
+            font-size: 10px;
+            border: 0.5px solid #6b6b6b;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .page-item:hover:not(.disabled) {
+            color: #000;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-item {
+                padding: 5px 0;
+            }
+
+            .date-col {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .table-row {
+                flex-direction: column;
+                align-items: flex-start;
+                height: auto;
+            }
+
+            .table-cell {
+                margin-bottom: 10px;
+            }
+
+            .action-button {
+                align-self: center;
+            }
+            .pagination-container {
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .dropdown select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#">Клиенты</a>
+            <a href="#">Заявки</a>
+            <a href="#" class="active">Статистика</a>
+            <div class="dropdown">
+                <span style="cursor: pointer;">Year ▼</span>
+                <div class="dropdown-content">
+                    <a href="#" class="dropdown-item">2024</a>
+                    <a href="#" class="dropdown-item">2023</a>
+                    <a href="#" class="dropdown-item">2022</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <span style="cursor: pointer;">Month ▼</span>
+                <div class="dropdown-content">
+                    <a href="#" class="dropdown-item">January</a>
+                    <a href="#" class="dropdown-item">February</a>
+                    <a href="#" class="dropdown-item">March</a>
+                    <a href="#" class="dropdown-item">April</a>
+                    <a href="#" class="dropdown-item">May</a>
+                    <a href="#" class="dropdown-item">June</a>
+                    <a href="#" class="dropdown-item">July</a>
+                    <a href="#" class="dropdown-item">August</a>
+                    <a href="#" class="dropdown-item">September</a>
+                    <a href="#" class="dropdown-item">October</a>
+                    <a href="#" class="dropdown-item">November</a>
+                    <a href="#" class="dropdown-item">December</a>
+                </div>
+            </div>
+        </nav>
+        <a href="#">Личный кабинет</a>
+    </header>
+
+    <div class="table-header">
+        <div class="header-item name-col">Название</div>
+        <div class="header-item date-col">
+            <select class="dropdown" style="width: 80px; margin-right: 5px;">
+                <option value="">Year</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+            </select>
+            <select class="dropdown" style="width: 70px;">
+                <option value="">Month</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </div>
+        <div class="header-item time-col">Время</div>
+        <div class="header-item comment-col">Комментарий</div>
+        <div class="header-item client-col">Клиент</div>
+    </div>
+
+    <div class="table-row">
+        <div class="table-cell invoice-number">Счет 1</div>
+        <div class="table-cell date">12.01.25</div>
+        <div class="table-cell time">12:25</div>
+        <div class="table-cell description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+        <button class="action-button">Открыть заявку</button>
+    </div>
+    <div class="table-row">
+        <div class="table-cell invoice-number">Счет 2</div>
+        <div class="table-cell date">12.01.25</div>
+        <div class="table-cell time">12:25</div>
+        <div class="table-cell description">
+            Lorem ipsum dolor sit amet
+        </div>
+        <button class="action-button">Открыть заявку</button>
+    </div>
+    <div class="table-row">
+        <div class="table-cell invoice-number">Счет 3</div>
+        <div class="table-cell date">12.01.25</div>
+        <div class="table-cell time">12:25</div>
+        <div class="table-cell description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        </div>
+        <button class="action-button">Открыть заявку</button>
+    </div>
+    <div class="table-row">
+        <div class="table-cell invoice-number">Счет 4</div>
+        <div class="table-cell date">12.01.25</div>
+        <div class="table-cell time">12:25</div>
+        <div class="table-cell description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        </div>
+        <button class="action-button">Открыть заявку</button>
+    </div>
+    <div class="table-row">
+        <div class="table-cell invoice-number">Счет 5</div>
+        <div class="table-cell date">12.01.25</div>
+        <div class="table-cell time">12:25</div>
+        <div class="table-cell description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </div>
+        <button class="action-button">Открыть заявку</button>
+    </div>
+    <div class="table-row">
+        <div class="table-cell invoice-number">Счет 6</div>
+        <div class="table-cell date">12.01.25</div>
+        <div class="table-cell time">12:25</div>
+        <div class="table-cell description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+        <button class="action-button">Открыть заявку</button>
+    </div>
+    <div class="table-row">
+        <div class="table-cell invoice-number">Счет 7</div>
+        <div class="table-cell date">12.01.25</div>
+        <div class="table-cell time">12:25</div>
+        <div class="table-cell description">
+            Lorem ipsum dolor sit amet
+        </div>
+        <button class="action-button">Открыть заявку</button>
+    </div>
+    <div class="table-row">
+        <div class="table-cell invoice-number">Счет 8</div>
+        <div class="table-cell date">12.01.25</div>
+        <div class="table-cell time">12:25</div>
+        <div class="table-cell description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        </div>
+        <button class="action-button">Открыть заявку</button>
+    </div>
+    <div class="table-row">
+        <div class="table-cell invoice-number">Счет 9</div>
+        <div class="table-cell date">12.01.25</div>
+        <div class="table-cell time">12:25</div>
+        <div class="table-cell description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+        <button class="action-button">Открыть заявку</button>
+    </div>
+    <div class="table-row">
+        <div class="table-cell invoice-number">Счет 10</div>
+        <div class="table-cell date">12.01.25</div>
+        <div class="table-cell time">12:25</div>
+        <div class="table-cell description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </div>
+        <button class="action-button">Открыть заявку</button>
+    </div>
+
+    <div class="pagination-container">
+        <span class="page-item disabled">&lt;&lt;</span>
+        <span class="page-item disabled">&lt;</span>
+        
+        <div class="dropdown">
+            <select id="monthDropdown">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </div>
+
+        <div class="dropdown">
+            <select id="yearDropdown">
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+            </select>
+        </div>
+
+        <span class="page-item">1</span>
+        <span class="page-item">2</span>
+        <span class="current-page">...</span>
+        <span class="page-item">20</span>
+        <span class="page-item">&gt;</span>
+        <span class="page-item">&gt;&gt;</span>
+    </div>
+</body>
+</html>

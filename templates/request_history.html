@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Inter, sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            min-width: 400px;
+            height: 50px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .nav-item {
+            margin-right: 20px;
+            font-family: Inter, sans-serif;
+            font-size: 14px;
+            color: #000000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            opacity: 0.8;
+        }
+
+        .nav-item.underline {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .nav-item.regular {
+            font-weight: 400;
+        }
+
+        .personal-cabinet {
+            margin-left: auto;
+            font-weight: 400;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-item {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: Inter, sans-serif;
+            font-size: 14px;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+        .client-dropdown {
+            margin-bottom: 15px;
+            position: relative;
+            width: 98px;
+            height: 25px;
+        }
+        .client-dropdown select {
+            width: 100%;
+            height: 100%;
+            padding: 5px;
+            border-radius: 10px;
+            border: 0.5px solid #6b6b6b;
+            font-size: 10px;
+            color: #6b6b6b;
+            appearance: none;
+            padding-right: 25px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        .client-dropdown::after {
+            content: '';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 4.5px solid transparent;
+            border-right: 4.5px solid transparent;
+            border-top: 5px solid #6b6b6b;
+            pointer-events: none;
+        }
+        .table-header {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            font-weight: 400;
+            color: #000000;
+        }
+        .table-header div {
+            min-width: 50px;
+        }
+        .request-table {
+            width: 100%;
+            max-width: 1240px;
+            border-collapse: collapse;
+            font-family: Inter, sans-serif;
+            color: #6b6b6b;
+            margin: 0 auto;
+        }
+
+        .request-table tr {
+            border-bottom: 0.5px solid #6b6b6b;
+        }
+
+        .request-table td {
+            padding: 15px 10px;
+            font-size: 12px;
+            vertical-align: top;
+            word-wrap: break-word;
+        }
+
+        .open-request-btn {
+            width: 100px;
+            height: 25px;
+            border: 0.5px solid #6b6b6b;
+            border-radius: 10px;
+            background: transparent;
+            color: #6b6b6b;
+            font-family: Inter, sans-serif;
+            font-size: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .open-request-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+        .pagination-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 300px;
+            height: 25px;
+            gap: 15px;
+            padding: 10px;
+        }
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .pagination-controls span {
+            color: #6b6b6b;
+            font-size: 10px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .pagination-controls span:hover {
+            opacity: 0.7;
+        }
+        .current-page {
+            width: 20px;
+            height: 20px;
+            border: 0.5px solid #6b6b6b;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-button {
+            width: 56px;
+            height: 25px;
+            border: 0.5px solid #6b6b6b;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #f5f5f5;
+        }
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-item {
+                margin-bottom: 10px;
+            }
+
+            .personal-cabinet {
+                margin-left: 0;
+            }
+            .table-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .request-table td {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .request-table tr {
+                display: block;
+                margin-bottom: 20px;
+            }
+
+            .open-request-btn {
+                display: block;
+                margin: 10px auto;
+            }
+        }
+        @media (max-width: 400px) {
+            .pagination-container {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="dropdown">
+            <span class="nav-item regular">Клиенты</span>
+            <div class="dropdown-content">
+                <a href="#" class="dropdown-item">Клиент 1</a>
+                <a href="#" class="dropdown-item">Клиент 2</a>
+                <a href="#" class="dropdown-item">Клиент 3</a>
+            </div>
+        </div>
+        <a href="#" class="nav-item underline">Заявки</a>
+        <a href="#" class="nav-item regular">Статистика</a>
+        <a href="#" class="nav-item regular personal-cabinet">Личный кабинет</a>
+    </nav>
+
+    <div class="header-title">
+        История заявок
+    </div>
+
+    <div class="client-dropdown">
+        <select id="clientDropdown">
+            <option value="">Выбор клиента</option>
+            <option value="client1">Клиент1</option>
+            <option value="client2">Клиент2</option>
+            <option value="client3">Клиент3</option>
+        </select>
+    </div>
+
+    <div class="table-header">
+        <div>Название</div>
+        <div>Дата</div>
+        <div>Время</div>
+        <div>Комментарий</div>
+        <div>Клиент</div>
+    </div>
+
+    <table class="request-table">
+        <tr>
+            <td>Счет 1</td>
+            <td>12.01.24</td>
+            <td>12:25</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+            <td><button class="open-request-btn">Открыть заявку</button></td>
+        </tr>
+        <tr>
+            <td>Счет 2</td>
+            <td>12.01.24</td>
+            <td>12:25</td>
+            <td>Lorem ipsum dolor sit amet</td>
+            <td><button class="open-request-btn">Открыть заявку</button></td>
+        </tr>
+        <tr>
+            <td>Счет 3</td>
+            <td>12.01.24</td>
+            <td>12:25</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</td>
+            <td><button class="open-request-btn">Открыть заявку</button></td>
+        </tr>
+        <tr>
+            <td>Счет 4</td>
+            <td>12.01.24</td>
+            <td>12:25</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</td>
+            <td><button class="open-request-btn">Открыть заявку</button></td>
+        </tr>
+        <tr>
+            <td>Счет 5</td>
+            <td>12.01.24</td>
+            <td>12:25</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            <td><button class="open-request-btn">Открыть заявку</button></td>
+        </tr>
+        <tr>
+            <td>Счет 6</td>
+            <td>12.01.24</td>
+            <td>12:25</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+            <td><button class="open-request-btn">Открыть заявку</button></td>
+        </tr>
+        <tr>
+            <td>Счет 7</td>
+            <td>12.01.24</td>
+            <td>12:25</td>
+            <td>Lorem ipsum dolor sit amet</td>
+            <td><button class="open-request-btn">Открыть заявку</button></td>
+        </tr>
+        <tr>
+            <td>Счет 8</td>
+            <td>12.01.24</td>
+            <td>12:25</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</td>
+            <td><button class="open-request-btn">Открыть заявку</button></td>
+        </tr>
+        <tr>
+            <td>Счет 9</td>
+            <td>12.01.24</td>
+            <td>12:25</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+            <td><button class="open-request-btn">Открыть заявку</button></td>
+        </tr>
+        <tr>
+            <td>Счет 10</td>
+            <td>12.01.24</td>
+            <td>12:25</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            <td><button class="open-request-btn">Открыть заявку</button></td>
+        </tr>
+    </table>
+
+    <div class="pagination-container">
+        <!-- Client Selection Dropdown -->
+        <select class="dropdown">
+            <option>Клиент1</option>
+            <option>Клиент2</option>
+            <option>Клиент3</option>
+        </select>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-controls">
+            <!-- First Page -->
+            <span style="color: #d9d9d9;">&lt;&lt;</span>
+            
+            <!-- Previous Page -->
+            <span style="color: #d9d9d9;">&lt;</span>
+            
+            <!-- Page Numbers -->
+            <span style="color: #d9d9d9;">1</span>
+            <span>2</span>
+            
+            <!-- Current Page Indicator -->
+            <div class="current-page">
+                <span>...</span>
+            </div>
+            
+            <span>20</span>
+            
+            <!-- Next Page -->
+            <span>&gt;</span>
+            
+            <!-- Last Page -->
+            <span>&gt;&gt;</span>
+        </div>
+
+        <!-- Back Button -->
+        <div class="back-button">
+            <span>Назад</span>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('clientDropdown').addEventListener('change', function() {
+            // Handle dropdown change
+            console.log('Selected client:', this.value);
+        });
+    </script>
+</body>
+</html>
